@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Solus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+      <a href="Solus.html" class="logo">Solus<span>.</span></a>
+      <nav class="nav-links">
+        <a href="Solus.html">Home</a>
+        <a href="Solus.html#men">Men</a>
+        <a href="Solus.html#women">Women</a>
+        <a href="Solus.html#accessories">Accessories</a>
+        <a class="active" href="about.html">About Us</a>
+      </nav>
+      <div class="nav-right">
+        <a class="login-link" href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+        <a class="nav-icon" href="cart.html"><i class="fa-solid fa-bag-shopping"></i> <span class="badge js-cart-count">0</span></a>
+        <a class="profile-link" href="profile.html"><i class="fa-regular fa-user"></i> <span class="js-user-name">Profile</span></a>
+      </div>
+    </div>
+    <div class="mobile-panel" id="mobilePanel">
+      <div class="container">
+        <a href="Solus.html">Home</a>
+        <a href="Solus.html#men">Men</a>
+        <a href="Solus.html#women">Women</a>
+        <a href="Solus.html#accessories">Accessories</a>
+        <a href="about.html">About Us</a>
+        <a href="cart.html">Cart</a>
+        <a href="login.html">Login</a><a href="profile.html">Profile</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container page">
+    <section class="about-hero">
+      <p class="kicker">About Solus</p>
+      <h1 class="section-title">A cleaner shopping experience for modern fashion.</h1>
+      <p class="lead">I removed the Home, Cart, and Profile content from the About Us page itself and kept Profile as its own separate item in the navigation bar. This page now focuses only on Solus brand details and contact information.</p>
+    </section>
+
+    <section class="grid-2">
+      <div class="panel">
+        <h3>Who We Are</h3>
+        <p class="lead">Solus is a modern fashion and lifestyle concept created to give customers a smooth online shopping journey. The website highlights men's wear, women's wear, and accessories with a simple design, clear navigation, and responsive layout.</p>
+        <p class="lead">Our goal is to make online browsing feel premium, easy, and visually attractive while keeping the customer experience fast and user-friendly.</p>
+        <div class="stats">
+          <div class="stat"><strong>3+</strong><span class="muted">Product categories</span></div>
+          <div class="stat"><strong>100%</strong><span class="muted">Responsive layout</span></div>
+          <div class="stat"><strong>24/7</strong><span class="muted">Frontend access</span></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Contact Details</h3>
+        <p><strong>Email:</strong> support@solus.com</p>
+        <p><strong>Phone:</strong> +94 77 123 4567</p>
+        <p><strong>Location:</strong> Negombo, Sri Lanka</p>
+        <p><strong>Hours:</strong> Monday - Saturday, 9.00 AM - 6.00 PM</p>
+        <hr style="border-color:var(--line);margin:1.2rem 0;">
+        <h3>Why Choose Solus</h3>
+        <p class="lead">Modern style, clear product display, profile management, cart support, and order tracking together create a complete frontend shopping website.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="panel">
+        <h3>Contact Us</h3>
+        <form id="contactForm" class="form-grid">
+          <div class="form-group">
+            <label for="contactName">Your Name</label>
+            <input id="contactName" type="text" required>
+          </div>
+          <div class="form-group">
+            <label for="contactEmail">Your Email</label>
+            <input id="contactEmail" type="email" required>
+          </div>
+          <div class="form-group">
+            <label for="contactMessage">Message</label>
+            <textarea id="contactMessage" required></textarea>
+          </div>
+          <button class="btn primary" type="submit">Send Message</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="copy">© 2026 Solus. All rights reserved.</div>
+  </footer>
+  <script src="site.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details | Solus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <button class="menu-btn" id="menuBtn"><i class="fa-solid fa-bars"></i></button>
+      <a href="Solus.html" class="logo">Solus<span>.</span></a>
+      <nav class="nav-links">
+        <a href="Solus.html">Home</a>
+        <a href="Solus.html#men">Men</a>
+        <a href="Solus.html#women">Women</a>
+        <a href="about.html">About Us</a>
+      </nav>
+      <div class="nav-right">
+        <a class="login-link" href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+        <a class="nav-icon" href="cart.html"><i class="fa-solid fa-bag-shopping"></i> <span class="badge js-cart-count">0</span></a>
+        <a class="profile-link" href="profile.html"><i class="fa-regular fa-user"></i> <span class="js-user-name">Profile</span></a>
+      </div>
+    </div>
+    <div class="mobile-panel" id="mobilePanel"><div class="container"><a href="Solus.html">Home</a><a href="about.html">About Us</a><a href="cart.html">Cart</a><a href="login.html">Login</a><a href="profile.html">Profile</a></div></div>
+  </header>
+
+  <main class="container page">
+    <div class="detail-layout">
+      <div class="detail-card detail-media">
+        <img id="productImg" src="images/mens-tee.jpg" alt="Product image">
+      </div>
+      <div class="detail-card">
+        <h1 id="productTitle">Essential Performance Tee</h1>
+        <div class="price">
+          <span class="now" id="productPrice">LKR 5,250</span>
+          <span class="was" id="productOldPrice">LKR 6,250</span>
+        </div>
+        <p id="productDesc" class="lead">Premium activewear designed for comfort, style, and daily performance.</p>
+        <h3>Select Size</h3>
+        <div class="size-row">
+          <button class="size" data-size="S">S</button>
+          <button class="size active" data-size="M">M</button>
+          <button class="size" data-size="L">L</button>
+          <button class="size" data-size="XL">XL</button>
+        </div>
+        <div class="actions">
+          <button class="btn primary" id="addToCartBtn">Add to Cart</button>
+          <a class="btn secondary" href="cart.html">Go to Cart</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="copy">© 2026 Solus. All rights reserved.</div></footer>
+  <script src="site.js"></script>
+</body>
+</html>

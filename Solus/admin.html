@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel | Solus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="admin-layout">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <a href="Solus.html" class="logo">Solus<span>.</span></a>
+    <nav class="admin-nav">
+      <a href="#" class="active" data-section="dashboard"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+      <a href="#" data-section="orders"><i class="fa-solid fa-box"></i> Orders</a>
+      <a href="#" data-section="products"><i class="fa-solid fa-shirt"></i> Products</a>
+      <a href="#" data-section="customers"><i class="fa-solid fa-users"></i> Customers</a>
+      <a href="#" data-section="messages"><i class="fa-solid fa-envelope"></i> Messages</a>
+      <a href="Solus.html" style="margin-top:auto"><i class="fa-solid fa-store"></i> View Store</a>
+      <a href="#" onclick="adminLogout()"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="admin-main">
+
+    <!-- DASHBOARD -->
+    <section id="section-dashboard">
+      <div class="admin-header">
+        <h1>Dashboard</h1>
+        <span class="muted" id="adminGreeting">Welcome back, Admin</span>
+      </div>
+      <div class="stat-grid" id="statGrid">
+        <div class="stat-card"><i class="fa-solid fa-box"></i><div class="stat-label">Total Orders</div><div class="stat-value" id="stat-orders">—</div></div>
+        <div class="stat-card"><i class="fa-solid fa-money-bill-wave"></i><div class="stat-label">Total Revenue</div><div class="stat-value" id="stat-revenue">—</div></div>
+        <div class="stat-card"><i class="fa-solid fa-users"></i><div class="stat-label">Customers</div><div class="stat-value" id="stat-customers">—</div></div>
+        <div class="stat-card"><i class="fa-solid fa-shirt"></i><div class="stat-label">Products</div><div class="stat-value" id="stat-products">—</div></div>
+      </div>
+      <div class="stat-grid" style="grid-template-columns:repeat(5,1fr)">
+        <div class="stat-card"><div class="stat-label">Processing</div><div class="stat-value" id="stat-processing">—</div></div>
+        <div class="stat-card"><div class="stat-label">Packed</div><div class="stat-value" id="stat-packed">—</div></div>
+        <div class="stat-card"><div class="stat-label">Shipped</div><div class="stat-value" id="stat-shipped">—</div></div>
+        <div class="stat-card"><div class="stat-label">Delivered</div><div class="stat-value" id="stat-delivered">—</div></div>
+        <div class="stat-card"><div class="stat-label">Cancelled</div><div class="stat-value" id="stat-cancelled">—</div></div>
+      </div>
+      <div class="admin-table-wrap">
+        <div class="admin-table-head"><h2>Recent Orders</h2></div>
+        <div id="recentOrdersTable"><div class="spinner"></div></div>
+      </div>
+    </section>
+
+    <!-- ORDERS -->
+    <section id="section-orders" style="display:none">
+      <div class="admin-header">
+        <h1>Orders</h1>
+        <div class="admin-search">
+          <input type="text" id="orderSearch" placeholder="Search order / customer…">
+          <button class="btn primary" onclick="loadAdminOrders()"><i class="fa-solid fa-search"></i></button>
+        </div>
+      </div>
+      <div class="admin-tabs" id="orderTabs">
+        <button class="admin-tab active" data-status="">All</button>
+        <button class="admin-tab" data-status="Processing">Processing</button>
+        <button class="admin-tab" data-status="Packed">Packed</button>
+        <button class="admin-tab" data-status="Shipped">Shipped</button>
+        <button class="admin-tab" data-status="Delivered">Delivered</button>
+        <button class="admin-tab" data-status="Cancelled">Cancelled</button>
+      </div>
+      <div class="admin-table-wrap">
+        <div id="ordersTable"><div class="spinner"></div></div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="section-products" style="display:none">
+      <div class="admin-header">
+        <h1>Products</h1>
+        <button class="btn primary" onclick="showProductForm()"><i class="fa-solid fa-plus"></i> Add Product</button>
+      </div>
+
+      <!-- Product Form -->
+      <div class="admin-form" id="productForm" style="display:none">
+        <h2 id="productFormTitle">Add New Product</h2>
+        <input type="hidden" id="pEditId">
+        <div class="form-row">
+          <div class="form-group"><label>Product ID (e.g. m5)</label><input id="pId" type="text" placeholder="m5"></div>
+          <div class="form-group"><label>Category</label>
+            <select id="pCategory">
+              <option value="men">Men</option>
+              <option value="women">Women</option>
+              <option value="accessories">Accessories</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label>Title</label><input id="pTitle" type="text" placeholder="Product name"></div>
+        <div class="form-group"><label>Description</label><textarea id="pDesc" placeholder="Short description…"></textarea></div>
+        <div class="form-row">
+          <div class="form-group"><label>Price (LKR)</label><input id="pPrice" type="number" min="0" step="0.01"></div>
+          <div class="form-group"><label>Old Price (LKR)</label><input id="pOldPrice" type="number" min="0" step="0.01"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Image filename</label><input id="pImage" type="text" placeholder="product.jpg"></div>
+          <div class="form-group"><label>Stock</label><input id="pStock" type="number" min="0" value="20"></div>
+        </div>
+        <div style="display:flex;gap:.75rem">
+          <button class="btn primary" onclick="saveProduct()">Save Product</button>
+          <button class="btn secondary" onclick="cancelProductForm()">Cancel</button>
+        </div>
+      </div>
+
+      <div class="admin-table-wrap">
+        <div id="productsTable"><div class="spinner"></div></div>
+      </div>
+    </section>
+
+    <!-- CUSTOMERS -->
+    <section id="section-customers" style="display:none">
+      <div class="admin-header">
+        <h1>Customers</h1>
+        <div class="admin-search">
+          <input type="text" id="customerSearch" placeholder="Search name / email…">
+          <button class="btn primary" onclick="loadAdminCustomers()"><i class="fa-solid fa-search"></i></button>
+        </div>
+      </div>
+      <div class="admin-table-wrap">
+        <div id="customersTable"><div class="spinner"></div></div>
+      </div>
+    </section>
+
+    <!-- MESSAGES -->
+    <section id="section-messages" style="display:none">
+      <div class="admin-header"><h1>Contact Messages</h1></div>
+      <div class="admin-table-wrap">
+        <div id="messagesTable"><div class="spinner"></div></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="site.js"></script>
+<script>
+const ADMIN_API = 'api/admin';
+let currentOrderStatus = '';
+
+// ---- Navigation ----
+function showSection(name) {
+  document.querySelectorAll('[id^="section-"]').forEach(s => s.style.display = 'none');
+  document.getElementById('section-' + name).style.display = '';
+  document.querySelectorAll('.admin-nav a').forEach(a => {
+    a.classList.toggle('active', a.dataset.section === name);
+  });
+  // Load data for section
+  if(name === 'dashboard') loadDashboard();
+  if(name === 'orders')    loadAdminOrders();
+  if(name === 'products')  loadAdminProducts();
+  if(name === 'customers') loadAdminCustomers();
+  if(name === 'messages')  loadAdminMessages();
+}
+
+document.querySelectorAll('.admin-nav a[data-section]').forEach(a => {
+  a.addEventListener('click', e => { e.preventDefault(); showSection(a.dataset.section); });
+});
+
+// ---- Auth guard ----
+async function checkAdminAuth() {
+  const result = await apiGet('auth.php?action=me');
+  if (!result.success || result.data.user.role !== 'admin') {
+    showMessage('Admin access required.', 'error');
+    setTimeout(() => location.href = 'login.html', 1200);
+    return false;
+  }
+  document.getElementById('adminGreeting').textContent = `Welcome back, ${result.data.user.name}`;
+  return true;
+}
+
+async function adminLogout() {
+  await apiGet('auth.php?action=logout');
+  location.href = 'login.html';
+}
+
+// ---- Dashboard ----
+async function loadDashboard() {
+  const result = await apiGet('admin.php?action=dashboard');
+  if (!result.success) { showMessage(result.message, 'error'); return; }
+  const s = result.data.stats;
+  document.getElementById('stat-orders').textContent = s.total_orders;
+  document.getElementById('stat-revenue').textContent = formatCurrency(s.total_revenue);
+  document.getElementById('stat-customers').textContent = s.total_customers;
+  document.getElementById('stat-products').textContent = s.total_products;
+
+  // Status breakdown
+  const bd = {};
+  (result.data.breakdown || []).forEach(r => bd[r.status] = r.cnt);
+  ['Processing','Packed','Shipped','Delivered','Cancelled'].forEach(st => {
+    const el = document.getElementById('stat-' + st.toLowerCase());
+    if(el) el.textContent = bd[st] || 0;
+  });
+
+  // Recent orders table
+  const orders = result.data.recent_orders || [];
+  const wrap = document.getElementById('recentOrdersTable');
+  if(!orders.length){ wrap.innerHTML = '<div class="admin-empty">No orders yet.</div>'; return; }
+  wrap.innerHTML = `<table class="admin-table">
+    <thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Status</th><th>Date</th></tr></thead>
+    <tbody>${orders.map(o=>`<tr>
+      <td><strong>${o.order_code}</strong></td>
+      <td>${o.customer}</td>
+      <td>${formatCurrency(o.total)}</td>
+      <td><span class="status-badge status-${o.status.toLowerCase()}">${o.status}</span></td>
+      <td class="muted">${o.created_at}</td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+// ---- Orders ----
+document.getElementById('orderTabs')?.querySelectorAll('.admin-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('#orderTabs .admin-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentOrderStatus = tab.dataset.status;
+    loadAdminOrders();
+  });
+});
+
+async function loadAdminOrders() {
+  document.getElementById('ordersTable').innerHTML = '<div class="spinner"></div>';
+  const search = document.getElementById('orderSearch')?.value.trim() || '';
+  const params = new URLSearchParams({ status: currentOrderStatus, search });
+  const result = await apiGet(`admin.php?action=orders&${params}`);
+  const wrap = document.getElementById('ordersTable');
+  if(!result.success){ wrap.innerHTML = `<div class="admin-empty">${result.message}</div>`; return; }
+  const orders = result.data.orders || [];
+  if(!orders.length){ wrap.innerHTML = '<div class="admin-empty">No orders found.</div>'; return; }
+  wrap.innerHTML = `<table class="admin-table">
+    <thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Date</th><th>Action</th></tr></thead>
+    <tbody>${orders.map(o=>`<tr>
+      <td><strong>${o.order_code}</strong><br><small class="muted">${o.full_name||''}</small></td>
+      <td>${o.customer}<br><small class="muted">${o.email}</small></td>
+      <td style="max-width:200px;font-size:.82rem">${o.items.map(i=>`${i.title} (${i.size})×${i.quantity}`).join('<br>')}</td>
+      <td>${formatCurrency(o.total)}</td>
+      <td><span class="status-badge status-${o.status.toLowerCase()}">${o.status}</span></td>
+      <td class="muted" style="white-space:nowrap">${o.date}</td>
+      <td>
+        <select class="status-select" onchange="updateOrderStatus('${o.order_code}', this.value)">
+          ${['Processing','Packed','Shipped','Delivered','Cancelled'].map(s=>`<option${s===o.status?' selected':''}>${s}</option>`).join('')}
+        </select>
+      </td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+async function updateOrderStatus(orderCode, status) {
+  const result = await apiPost('admin.php?action=update_order_status', { order_code: orderCode, status });
+  showMessage(result.message, result.success ? 'success' : 'error');
+  if(result.success) await loadAdminOrders();
+}
+
+// ---- Products ----
+let editingProductId = null;
+
+async function loadAdminProducts() {
+  document.getElementById('productsTable').innerHTML = '<div class="spinner"></div>';
+  const result = await apiGet('admin.php?action=products');
+  const wrap = document.getElementById('productsTable');
+  if(!result.success){ wrap.innerHTML = `<div class="admin-empty">${result.message}</div>`; return; }
+  const products = result.data.products || [];
+  if(!products.length){ wrap.innerHTML = '<div class="admin-empty">No products found.</div>'; return; }
+  wrap.innerHTML = `<table class="admin-table">
+    <thead><tr><th>ID</th><th>Image</th><th>Title</th><th>Category</th><th>Price</th><th>Old Price</th><th>Stock</th><th>Actions</th></tr></thead>
+    <tbody>${products.map(p=>`<tr>
+      <td><code>${p.id}</code></td>
+      <td><img src="${p.image}" alt="${p.title}" style="width:52px;height:52px;object-fit:cover;border-radius:8px;border:1px solid var(--line)"></td>
+      <td><strong>${p.title}</strong><br><small class="muted">${p.description||''}</small></td>
+      <td>${p.category}</td>
+      <td>${formatCurrency(p.price)}</td>
+      <td>${p.old_price?formatCurrency(p.old_price):'—'}</td>
+      <td>${p.stock}</td>
+      <td style="white-space:nowrap">
+        <button class="btn secondary" style="padding:.4rem .7rem;font-size:.82rem" onclick='editProduct(${JSON.stringify(p)})'><i class="fa-solid fa-pen"></i></button>
+        <button class="btn danger"    style="padding:.4rem .7rem;font-size:.82rem;margin-left:.4rem" onclick="deleteProduct('${p.id}','${p.title}')"><i class="fa-solid fa-trash"></i></button>
+      </td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+function showProductForm(reset=true){
+  if(reset){ clearProductForm(); editingProductId=null; document.getElementById('productFormTitle').textContent='Add New Product'; document.getElementById('pId').disabled=false; }
+  document.getElementById('productForm').style.display='';
+  document.getElementById('productForm').scrollIntoView({behavior:'smooth'});
+}
+
+function clearProductForm(){
+  ['pId','pTitle','pDesc','pPrice','pOldPrice','pImage'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('pStock').value=20;
+  document.getElementById('pCategory').value='men';
+  document.getElementById('pEditId').value='';
+}
+
+function cancelProductForm(){
+  document.getElementById('productForm').style.display='none';
+  clearProductForm(); editingProductId=null;
+}
+
+function editProduct(p){
+  editingProductId = p.id;
+  document.getElementById('productFormTitle').textContent = 'Edit Product';
+  document.getElementById('pEditId').value = p.id;
+  document.getElementById('pId').value = p.id; document.getElementById('pId').disabled=true;
+  document.getElementById('pCategory').value = p.category;
+  document.getElementById('pTitle').value = p.title;
+  document.getElementById('pDesc').value = p.description || '';
+  document.getElementById('pPrice').value = p.price;
+  document.getElementById('pOldPrice').value = p.old_price || '';
+  document.getElementById('pImage').value = p.image || '';
+  document.getElementById('pStock').value = p.stock || 0;
+  showProductForm(false);
+}
+
+async function saveProduct(){
+  const isEdit = !!editingProductId;
+  const payload = {
+    id: editingProductId || document.getElementById('pId').value.trim(),
+    category: document.getElementById('pCategory').value,
+    title: document.getElementById('pTitle').value.trim(),
+    description: document.getElementById('pDesc').value.trim(),
+    price: parseFloat(document.getElementById('pPrice').value) || 0,
+    old_price: parseFloat(document.getElementById('pOldPrice').value) || 0,
+    image: document.getElementById('pImage').value.trim(),
+    stock: parseInt(document.getElementById('pStock').value) || 0,
+  };
+  const method = isEdit ? 'PUT' : 'POST';
+  try {
+    const res = await fetch(`api/admin.php?action=products`, {
+      method, credentials:'same-origin',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    const result = await res.json();
+    showMessage(result.message, result.success ? 'success' : 'error');
+    if(result.success){ cancelProductForm(); loadAdminProducts(); }
+  } catch(e){ showMessage('Network error.','error'); }
+}
+
+async function deleteProduct(id, title){
+  if(!confirm(`Delete "${title}"? This cannot be undone.`)) return;
+  try {
+    const res = await fetch(`api/admin.php?action=products`, {
+      method:'DELETE', credentials:'same-origin',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({id})
+    });
+    const result = await res.json();
+    showMessage(result.message, result.success ? 'success' : 'error');
+    if(result.success) loadAdminProducts();
+  } catch(e){ showMessage('Network error.','error'); }
+}
+
+// ---- Customers ----
+async function loadAdminCustomers() {
+  document.getElementById('customersTable').innerHTML = '<div class="spinner"></div>';
+  const search = document.getElementById('customerSearch')?.value.trim() || '';
+  const result = await apiGet(`admin.php?action=customers&search=${encodeURIComponent(search)}`);
+  const wrap = document.getElementById('customersTable');
+  if(!result.success){ wrap.innerHTML = `<div class="admin-empty">${result.message}</div>`; return; }
+  const customers = result.data.customers || [];
+  if(!customers.length){ wrap.innerHTML = '<div class="admin-empty">No customers found.</div>'; return; }
+  wrap.innerHTML = `<table class="admin-table">
+    <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Role</th><th>Orders</th><th>Total Spent</th><th>Joined</th></tr></thead>
+    <tbody>${customers.map(c=>`<tr>
+      <td><strong>${c.name}</strong></td>
+      <td>${c.email}</td>
+      <td>${c.phone||'—'}</td>
+      <td><span class="status-badge ${c.role==='admin'?'status-shipped':'status-delivered'}">${c.role}</span></td>
+      <td>${c.order_count}</td>
+      <td>${formatCurrency(c.total_spent)}</td>
+      <td class="muted">${c.joined}</td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+// Customer search on Enter
+document.getElementById('customerSearch')?.addEventListener('keydown', e => { if(e.key==='Enter') loadAdminCustomers(); });
+document.getElementById('orderSearch')?.addEventListener('keydown', e => { if(e.key==='Enter') loadAdminOrders(); });
+
+// ---- Messages ----
+async function loadAdminMessages() {
+  document.getElementById('messagesTable').innerHTML = '<div class="spinner"></div>';
+  const result = await apiGet('admin.php?action=messages');
+  const wrap = document.getElementById('messagesTable');
+  if(!result.success){ wrap.innerHTML = `<div class="admin-empty">${result.message}</div>`; return; }
+  const messages = result.data.messages || [];
+  if(!messages.length){ wrap.innerHTML = '<div class="admin-empty">No messages yet.</div>'; return; }
+  wrap.innerHTML = `<table class="admin-table">
+    <thead><tr><th>Name</th><th>Email</th><th>Subject</th><th>Message</th><th>Date</th></tr></thead>
+    <tbody>${messages.map(m=>`<tr>
+      <td><strong>${m.name}</strong></td>
+      <td>${m.email}</td>
+      <td>${m.subject||'—'}</td>
+      <td style="max-width:280px;font-size:.87rem">${m.message}</td>
+      <td class="muted" style="white-space:nowrap">${m.created_at}</td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+// ---- Init ----
+(async () => {
+  const ok = await checkAdminAuth();
+  if(ok) loadDashboard();
+})();
+</script>
+</body>
+</html>

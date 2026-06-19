@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile | Solus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <button class="menu-btn" id="menuBtn"><i class="fa-solid fa-bars"></i></button>
+      <a href="Solus.html" class="logo">Solus<span>.</span></a>
+      <nav class="nav-links">
+        <a href="Solus.html">Home</a>
+        <a href="purchase-history.html">History</a>
+        <a href="track-order.html">Track Order</a>
+        <a href="about.html">About Us</a>
+        <a href="admin.html" class="js-admin-link" style="display:none">Admin</a>
+      </nav>
+      <div class="nav-right">
+        <a class="login-link" href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+        <a class="nav-icon" href="cart.html"><i class="fa-solid fa-bag-shopping"></i> <span class="badge js-cart-count">0</span></a>
+        <a class="profile-link" href="profile.html"><i class="fa-regular fa-user"></i> <span class="js-user-name">Profile</span></a>
+      </div>
+    </div>
+    <div class="mobile-panel" id="mobilePanel">
+      <div class="container">
+        <a href="Solus.html">Home</a>
+        <a href="purchase-history.html">History</a>
+        <a href="track-order.html">Track Order</a>
+        <a href="about.html">About Us</a>
+        <a href="admin.html" class="js-admin-link" style="display:none">Admin Panel</a>
+        <a href="cart.html">Cart</a>
+      <a href="login.html">Login</a></div>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="grid-2">
+      <section class="panel" style="padding:1.75rem">
+        <h1>My Profile</h1>
+        <p class="form-note muted">Manage your personal details here.</p>
+        <form id="profileForm" class="form-grid">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input id="name" type="text" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input id="phone" type="text">
+          </div>
+          <div class="actions" style="display:flex;gap:.75rem;margin-top:.5rem">
+            <button class="btn primary" type="submit">Save Changes</button>
+            <button class="btn danger" type="button" onclick="logoutUser()">Sign Out</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel" style="padding:1.75rem">
+        <h2>Quick Links</h2>
+        <p><a class="link" href="purchase-history.html">View Purchase History</a></p>
+        <p><a class="link" href="track-order.html">Track My Orders</a></p>
+        <p><a class="link" href="cart.html">Open Cart</a></p>
+        <p><a class="link" href="about.html">Contact Support</a></p>
+        <div class="js-admin-link" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line)">
+          <h3 style="margin:0 0 .5rem">Admin</h3>
+          <p><a class="link" href="admin.html"><i class="fa-solid fa-gauge"></i> Go to Admin Panel</a></p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="copy">© 2026 Solus. All rights reserved.</div></footer>
+  <script src="site.js"></script>
+</body>
+</html>

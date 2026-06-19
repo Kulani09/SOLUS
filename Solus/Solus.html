@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solus | Active & Lifestyle Wear</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+      <a href="Solus.html" class="logo">Solus<span>.</span></a>
+      <nav class="nav-links">
+        <a class="active" href="Solus.html">Home</a>
+        <a href="#men">Men</a>
+        <a href="#women">Women</a>
+        <a href="#accessories">Accessories</a>
+        <a href="about.html">About Us</a>
+      </nav>
+      <div class="nav-right">
+        <div class="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Search products">
+        </div>
+        <a class="login-link" href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+        <a class="nav-icon" href="cart.html"><i class="fa-solid fa-bag-shopping"></i> <span class="badge js-cart-count">0</span></a>
+        <a class="profile-link" href="profile.html"><i class="fa-regular fa-user"></i> <span class="js-user-name">Profile</span></a>
+      </div>
+    </div>
+    <div class="mobile-panel" id="mobilePanel">
+      <div class="container">
+        <a href="Solus.html">Home</a>
+        <a href="#men">Men</a>
+        <a href="#women">Women</a>
+        <a href="#accessories">Accessories</a>
+        <a href="about.html">About Us</a>
+        <a href="cart.html">Cart</a>
+        <a href="login.html">Login</a><a href="profile.html">Profile</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <img src="images/poster.png" alt="Solus lifestyle collection banner">
+    <div class="hero-overlay"></div>
+    <div class="hero-content container">
+      <h1>Be Better, Every Day.</h1>
+      <p>Modern activewear and lifestyle pieces designed for comfort, movement, and confident everyday style.</p>
+      <div class="hero-cta">
+        <a href="#collections" class="btn primary">Shop Collection</a>
+        <a href="about.html" class="btn ghost">About Us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="collections container section" id="collections">
+    <h2>Shop by Collection</h2>
+    <div class="tiles">
+      <a class="tile" href="#men">
+        <img src="images/mens-title.jpg" alt="Men's collection">
+        <div class="tile-label">Men</div>
+      </a>
+      <a class="tile" href="#women">
+        <img src="images/womens.jpg" alt="Women's collection">
+        <div class="tile-label">Women</div>
+      </a>
+      <a class="tile" href="#accessories">
+        <img src="images/accessories.jpg" alt="Accessories collection">
+        <div class="tile-label">Accessories</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="product-section container" id="men">
+    <div class="section-head">
+      <h2>Men's Wear</h2>
+      <a class="link" href="#top">Top picks</a>
+    </div>
+    <div class="products" id="menGrid"></div>
+  </section>
+
+  <section class="product-section container" id="women">
+    <div class="section-head">
+      <h2>Women's Wear</h2>
+      <a class="link" href="#top">Top picks</a>
+    </div>
+    <div class="products" id="womenGrid"></div>
+  </section>
+
+  <section class="product-section container" id="accessories">
+    <div class="section-head">
+      <h2>Accessories</h2>
+      <a class="link" href="about.html">Need help?</a>
+    </div>
+    <div class="products" id="accessoriesGrid"></div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="logo" href="Solus.html">Solus<span>.</span></a>
+        <p class="muted">Premium lifestyle and activewear with a clean, modern shopping experience.</p>
+        <div class="socials">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#men">Men</a></li>
+          <li><a href="#women">Women</a></li>
+          <li><a href="#accessories">Accessories</a></li>
+          <li><a href="about.html">About Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Account</h4>
+        <ul>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="cart.html">Cart</a></li>
+          <li><a href="purchase-history.html">Purchase History</a></li>
+          <li><a href="track-order.html">Track Order</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 Solus. All rights reserved.</div>
+  </footer>
+
+  <script src="site.js"></script>
+</body>
+</html>
